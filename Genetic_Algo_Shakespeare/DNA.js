@@ -3,9 +3,9 @@ class DNA{
   constructor(target){
     this.target = target;
 
-    this.value = [];
+    this.gene = [];
     for(let i = 0; i < target.length; i++){
-      this.value.push(this.randomChar());
+      this.gene.push(this.randomChar());
     }
 
     this.fitness = 0;
@@ -20,14 +20,14 @@ class DNA{
   calcFitness(){
     this.fitness = 0;
     for(let i = 0; i < target.length; i++){
-      if(this.target[i] == this.value[i]){
+      if(this.target[i] == this.gene[i]){
         this.fitness = this.fitness + 1;
       }
     }
   }
 
   setDNA(dna){
-    this.value = dna.value;
+    this.gene = dna.gene;
   }
 
   crossover(other){
@@ -35,10 +35,10 @@ class DNA{
     var child_dna = new DNA(this.target);
     for(let i = 0; i < target.length; i++){
       if(i < rand){
-        child_dna.value[i] = this.value[i];
+        child_dna.gene[i] = this.gene[i];
       }
       else{
-        child_dna.value[i] = other.dna.value[i];
+        child_dna.gene[i] = other.dna.gene[i];
       }
     }
     return child_dna;
@@ -48,7 +48,7 @@ class DNA{
   mutation(mutation_rate){
     for(let i = 0; i < target.length; i++){
       if(random() <= mutation_rate){
-        this.value[i] = this.randomChar();
+        this.gene[i] = this.randomChar();
       }
     }
   }
